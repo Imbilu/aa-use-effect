@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Message from "./components/Message";
-import PictureDisplay from "./components/PictureDisplay";
+import { useState, useEffect } from 'react';
+import Message from './components/Message';
+import PictureDisplay from './components/PictureDisplay';
 
 function App() {
   const [size, setSize] = useState('s');
@@ -11,6 +11,21 @@ function App() {
   const [isBrown, setIsBrown] = useState(false);
   const [isLightBrown, setIsLightBrown] = useState(false);
   const [isYellow, setIsYellow] = useState(false);
+
+  useEffect(() => {
+    const colorArray = [];
+    if (isRed) colorArray.push('red');
+    if (isOrange) colorArray.push('orange');
+    if (isBrown) colorArray.push('brown');
+    if (isLightBrown) colorArray.push('light-brown');
+    if (isYellow) colorArray.push('yellow');
+    setFeatherColors(colorArray);
+    // console.log('IsRed: ', isRed);
+    // console.log('isOrange: ', isOrange);
+    // console.log('isBrown: ', isBrown);
+    // console.log('isLightBrown: ', isLightBrown);
+    // console.log('isYellow: ', isYellow);
+  }, [isRed, isOrange, isBrown, isLightBrown, isYellow]);
 
   return (
     <>
@@ -37,26 +52,41 @@ function App() {
       </div>
       <div className="button-controls">
         Feather Color(s):
-        <label><input
-          type="checkbox"
-          onChange={(e) => setIsRed(e.currentTarget.checked)}
-        />Red</label>
-        <label><input
-          type="checkbox"
-          onChange={(e) => setIsOrange(e.currentTarget.checked)}
-        />Orange</label>
-        <label><input
-          type="checkbox"
-          onChange={(e) => setIsBrown(e.currentTarget.checked)}
-        />Brown</label>
-        <label><input
-          type="checkbox"
-          onChange={(e) => setIsLightBrown(e.currentTarget.checked)}
-        />Light Brown</label>
-        <label><input
-          type="checkbox"
-          onChange={(e) => setIsYellow(e.currentTarget.checked)}
-        />Golden Yellow</label>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setIsRed(e.currentTarget.checked)}
+          />
+          Red
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setIsOrange(e.currentTarget.checked)}
+          />
+          Orange
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setIsBrown(e.currentTarget.checked)}
+          />
+          Brown
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setIsLightBrown(e.currentTarget.checked)}
+          />
+          Light Brown
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setIsYellow(e.currentTarget.checked)}
+          />
+          Golden Yellow
+        </label>
       </div>
 
       {/* Generated display based on user selections above */}
